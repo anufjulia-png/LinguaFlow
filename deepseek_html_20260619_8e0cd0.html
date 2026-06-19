@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>LinguaFlow | Онлайн-школа языков для детей и взрослых</title>
+    <!-- Google Fonts & Simple CSS Reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF9F0;   /* тёплый светлый фон */
+            color: #3E2A1F;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* тёплая цветовая палитра */
+        :root {
+            --warm-orange: #F6A75D;
+            --warm-terracotta: #E47A4B;
+            --warm-sand: #FDE4C2;
+            --warm-caramel: #C4632E;
+            --deep-brown: #4A2A1A;
+            --soft-cream: #FFF3E6;
+            --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+            --shadow-md: 0 20px 25px -12px rgba(0,0,0,0.08);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3E2A1F;
+        }
+
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--warm-orange);
+            color: #2F1E12;
+            font-weight: 600;
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            background-color: var(--warm-terracotta);
+            color: white;
+            box-shadow: 0 4px 12px rgba(228,122,75,0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #C95F34;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--warm-terracotta);
+            color: var(--warm-terracotta);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--warm-terracotta);
+            color: white;
+        }
+
+        /* шапка */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #E47A4B, #F6A75D);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4A2A1A;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--warm-terracotta);
+        }
+
+        /* hero */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            padding: 2rem 0 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            background: #FDE4C2;
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #B65324;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-highlight {
+            color: var(--warm-terracotta);
+            border-bottom: 3px solid var(--warm-orange);
+        }
+
+        .hero-stats {
+            margin-top: 1.8rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .hero-stats span {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--warm-terracotta);
+        }
+
+        /* кнопка диагностики */
+        .diag-btn {
+            background-color: #E47A4B;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(228,122,75,0.4);
+            transition: all 0.2s;
+            cursor: pointer;
+            margin-top: 1.2rem;
+        }
+
+        .diag-btn:hover {
+            background-color: #C95F34;
+            transform: scale(1.02);
+        }
+
+        /* список языков */
+        .language-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 2rem 0 1rem;
+        }
+
+        .lang-card {
+            background: white;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+            color: #3E2A1F;
+            border: 1px solid #FFE2BF;
+        }
+
+        /* карточки учителей */
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .teacher-card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .teacher-avatar {
+            width: 110px;
+            height: 110px;
+            background: #FCE8D9;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .teacher-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .teacher-badge {
+            background-color: #FEE6D2;
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        /* планы и цены */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+            border: 1px solid #FFE2BF;
+        }
+
+        .price-card h3 {
+            font-size: 1.6rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--warm-terracotta);
+            margin: 1rem 0;
+        }
+
+        /* отзывы */
+        .review-card {
+            background: #FFF6EB;
+            border-radius: 28px;
+            padding: 1.8rem;
+            margin: 1rem 0;
+            border-left: 8px solid var(--warm-orange);
+        }
+
+        .reviewer {
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-answer {
+            margin-top: 0.8rem;
+            color: #5e3a28;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* футер */
+        footer {
+            background: #2F1E12;
+            color: #FFE6D5;
+            padding: 3rem 0;
+            margin-top: 2rem;
+            border-radius: 40px 40px 0 0;
+        }
+
+        /* модальное окно диагностики */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 2rem;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        @media (max-width: 780px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+        }
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        .quiz-question p {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-option {
+            display: block;
+            margin: 0.5rem 0;
+        }
+        .result-box {
+            margin-top: 1rem;
+            background: #FCE8D9;
+            padding: 1rem;
+            border-radius: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- навигация -->
+        <div class="navbar">
+            <div class="logo">LinguaFlow</div>
+            <div class="nav-links">
+                <a href="#about">О школе</a>
+                <a href="#teachers">Преподаватели</a>
+                <a href="#prices">Цены</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#" id="diagnosticNavBtn" class="btn-outline btn" style="padding: 0.5rem 1.2rem;">Диагностика</a>
+            </div>
+        </div>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">🌟 Онлайн с живым общением</div>
+                <h1>Заговори свободно <span class="hero-highlight">с первого урока</span><br>Дети и взрослые</h1>
+                <p>Снимаем барьеры, даём результат. 80% времени говорят ученики. Молодые профессионалы, которые вдохновляют.</p>
+                <div class="hero-stats">
+                    <div><span>1500+</span><br>учеников</div>
+                    <div><span>98%</span><br>рекомендуют</div>
+                    <div><span>8</span><br>языков</div>
+                </div>
+                <button class="diag-btn" id="heroDiagBtn">📊 Пройти диагностику уровня →</button>
+            </div>
+            <div style="flex:0.8; min-width: 220px; background: #FDECD9; border-radius: 48px; padding: 2rem; text-align: center;">
+                <div style="font-size: 4rem;">🗣️🌍</div>
+                <p style="margin-top: 1rem;">Пробный урок <strong>бесплатно</strong><br>с определением уровня</p>
+            </div>
+        </div>
+
+        <!-- Языки -->
+        <div class="section">
+            <h2 style="text-align: center;">Какие языки мы преподаём</h2>
+            <div class="language-grid">
+                <span class="lang-card">🇬🇧 Английский</span>
+                <span class="lang-card">🇨🇳 Китайский</span>
+                <span class="lang-card">🇫🇷 Французский</span>
+                <span class="lang-card">🇩🇪 Немецкий</span>
+                <span class="lang-card">🇪🇸 Испанский</span>
+                <span class="lang-card">🇮🇹 Итальянский</span>
+                <span class="lang-card">🇸🇦 Арабский</span>
+            </div>
+            <p style="text-align: center; margin-top: 1rem;">Для любого возраста — от 6 лет до взрослых. Групповые и индивидуальные форматы.</p>
+        </div>
+
+        <!-- О школе (информация + молодые профессионалы) -->
+        <div class="section" id="about">
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+                <div style="flex:1">
+                    <h2>О LinguaFlow</h2>
+                    <p>Мы основаны молодыми лингвистами и фанатами своего дела. Наша цель — убрать скучную зубрежку и показать, что язык — это ключ к миру. Гибкое расписание, интерактивная платформа и преподаватели, которые уже прошли ваш путь.</p>
+                    <p style="margin-top: 1rem;">🏆 <strong>Гарантия результата:</strong> после 3 урока вернём деньги, если вы не чувствуете прогресс.</p>
+                    <p>📱 Доступ к материалам 24/7, разговорный клуб и живые вебинары.</p>
+                </div>
+                <div style="flex:1; background: var(--warm-sand); border-radius: 40px; padding: 2rem; text-align: center;">
+                    <div style="font-size: 3rem;">🎯 82%</div>
+                    <p>учеников достигают цели раньше срока</p>
+                    <hr style="margin: 1rem 0; border-color:#FFD2A5;">
+                    <div>👥 Средний возраст преподавателя — 27 лет, они знают современные методики и мемы на изучаемом языке ✨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Преподаватели - молодые профессионалы -->
+        <div class="section" id="teachers">
+            <h2 style="text-align: center;">Молодые профессионалы, которые вдохновляют</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem auto;">Не «скучные учителя», а друзья-наставники. Все имеют международные сертификаты и опыт жизни за границей.</p>
+            <div class="teachers-grid">
+                <div class="teacher-card">
+                    <div class="teacher-avatar">👩‍🏫✨</div>
+                    <div class="teacher-name">Алина С.</div>
+                    <div class="teacher-badge">Английский, Китайский</div>
+                    <p>Преподает через игры и мемы. Уровень HSK5, училась в Пекине.</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">🧑‍🎓🌍</div>
+                    <div class="teacher-name">Марк Р.</div>
+                    <div class="teacher-badge">Французский, Немецкий</div>
+                    <p>DAF C2, выпускник Сорбонны. Влюбляет в фонетику с первого созвона.</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">👩‍💻🎧</div>
+                    <div class="teacher-name">София Г.</div>
+                    <div class="teacher-badge">Испанский, Итальянский</div>
+                    <p>Жила в Мадриде и Риме. Помогает заговорить бегло за 4 месяца.</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">🧕📖</div>
+                    <div class="teacher-name">Лейла Х.</div>
+                    <div class="teacher-badge">Арабский (MSA, диалект)</div>
+                    <p>Носитель, но говорит на идеальном русском. Современный подход к арабскому.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Форматы и цены (что мы предлагаем) -->
+        <div class="section" id="prices">
+            <h2 style="text-align: center;">Выберите удобный формат</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>⭐ Сам</h3>
+                    <p>Тренажёр + чат с куратором</p>
+                    <div class="price">2 990 ₽/мес</div>
+                    <ul style="margin: 1rem 0 1.5rem 1.2rem;">
+                        <li>ИИ-тренировка лексики</li>
+                        <li>Разговорный клуб 2 раза/мес</li>
+                        <li>Доступ к архиву</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn" style="width:100%; text-align: center;">Выбрать</a>
+                </div>
+                <div class="price-card" style="border: 2px solid var(--warm-terracotta);">
+                    <h3>🔥 С учителем</h3>
+                    <p>Группа до 6 человек</p>
+                    <div class="price">6 490 ₽/мес</div>
+                    <ul style="margin: 1rem 0 1.5rem 1.2rem;">
+                        <li>2 занятия в неделю (60 мин)</li>
+                        <li>Живая обратная связь</li>
+                        <li>Домашка с автопроверкой</li>
+                    </ul>
+                    <a href="#" class="btn-primary btn" style="width:100%; text-align: center;">Записаться</a>
+                </div>
+                <div class="price-card">
+                    <h3>👑 VIP индивидуально</h3>
+                    <p>Персональный план</p>
+                    <div class="price">1 490 ₽/урок</div>
+                    <ul style="margin: 1rem 0 1.5rem 1.2rem;">
+                        <li>Гибкое расписание</li>
+                        <li>Фокус на экзамены/переезд</li>
+                        <li>Поддержка 24/7</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn" style="width:100%; text-align: center;">Запрос</a>
+                </div>
+            </div>
+            <p style="text-align: center;">* Рассрочка без % и гарантия возврата за первый месяц</p>
+        </div>
+
+        <!-- Социальное доказательство + отзывы -->
+        <div class="section">
+            <h2 style="text-align: center;">Реальные истории наших учеников</h2>
+            <div class="review-card">
+                <p>“Пришла с уровнем A1 и ужасным страхом говорить. Через 5 месяцев сдала IELTS на 6.5 и уехала учиться в Чехию. Спасибо Алине и живому общению!”</p>
+                <div class="reviewer">— Екатерина, 24 года, английский</div>
+            </div>
+            <div class="review-card">
+                <p>“Сын 11 лет полюбил китайский благодаря игровым урокам Лейлы. Сейчас читает иероглифы и смотрит мультики без перевода. Огромный прогресс!”</p>
+                <div class="reviewer">— Мария, мама Андрея</div>
+            </div>
+            <div class="review-card">
+                <p>“Я взрослый мужчина 45 лет, боялся начать немецкий. Марк создал безопасную атмосферу, ошибки — это норма. За 6 месяцев дошли до B1!”</p>
+                <div class="reviewer">— Дмитрий, немецкий</div>
+            </div>
+        </div>
+
+        <!-- FAQ блок -->
+        <div class="section">
+            <h2>Часто задаваемые вопросы</h2>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">❓ А если я пропущу занятие? <span>+</span></div>
+                <div class="faq-answer">Все уроки записываются, вы получите доступ к записи в личном кабинете. Для индивидуальных занятий можно перенести занятие за 6 часов.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">❓ Какой возраст подходит для детей? <span>+</span></div>
+                <div class="faq-answer">Мы работаем с детьми от 6 лет. Игровые методики, интерактивные доски и короткие сессии внимания.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">❓ Есть ли сертификат после курса? <span>+</span></div>
+                <div class="faq-answer">Да, после завершения любого модуля вы получаете именной сертификат о прохождении уровня (A1-C1).</div>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="section" id="contacts" style="border-bottom: none;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
+                <div>
+                    <h3>📞 Связаться с нами</h3>
+                    <p>+7 (999) 123-45-67 (WhatsApp, Telegram)<br>hello@linguaflow.school<br>Москва (онлайн по всему миру)</p>
+                    <p>📍 Реквизиты: ИП “ЛингваФлоу”, ОГРН 1234567890</p>
+                </div>
+                <div>
+                    <h3>📲 Соцсети</h3>
+                    <p>Instagram | VK | YouTube — разбор мемов и уроки ежедневно</p>
+                    <button class="btn-outline btn" id="footerDiagBtn" style="margin-top: 0.8rem;">📊 Диагностика уровня</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p style="text-align: center;">© 2026 LinguaFlow — учим языки с теплом и профессионализмом. Английский, китайский, французский, немецкий, испанский, итальянский, арабский для детей и взрослых.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно диагностики -->
+    <div id="diagnosticModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>🔍 Быстрая диагностика уровня</h3>
+            <p>Ответьте на пару вопросов, и мы подберем оптимальный старт</p>
+            <div id="quizContainer">
+                <div class="quiz-question">
+                    <p>1. Как вы оцениваете свой текущий уровень?</p>
+                    <label class="quiz-option"><input type="radio" name="q1" value="A1"> Начинающий (почти ничего не знаю)</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="A2"> Немного знаю слова/фразы</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="B1"> Могу поддержать беседу на простые темы</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="B2+"> Свободно, но нужна практика</label>
+                </div>
+                <div class="quiz-question">
+                    <p>2. Ваша цель изучения?</p>
+                    <label class="quiz-option"><input type="radio" name="q2" value="travel"> Для путешествий / жизни</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="work"> Карьера / экзамены</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="kids"> Для ребёнка / школьная программа</label>
+                </div>
+                <button id="submitQuiz" class="btn-primary btn" style="width:100%">Получить рекомендацию</button>
+                <div id="quizResult" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // модальное окно диагностики
+        const modal = document.getElementById('diagnosticModal');
+        const openBtns = [document.getElementById('heroDiagBtn'), document.getElementById('diagnosticNavBtn'), document.getElementById('footerDiagBtn')];
+        const closeBtn = document.querySelector('.close-modal');
+
+        function openModal() {
+            modal.style.display = 'flex';
+            document.getElementById('quizResult').innerHTML = '';
+            document.querySelectorAll('input[name="q1"]').forEach(radio => radio.checked = false);
+            document.querySelectorAll('input[name="q2"]').forEach(radio => radio.checked = false);
+        }
+
+        openBtns.forEach(btn => {
+            if(btn) btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+        closeBtn.addEventListener('click', () => modal.style.display = 'none');
+        window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+
+        // обработка диагностики
+        document.getElementById('submitQuiz')?.addEventListener('click', () => {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            if(!q1 || !q2) {
+                document.getElementById('quizResult').innerHTML = '<div class="result-box">⚠️ Выберите оба варианта, чтобы мы дали точную рекомендацию.</div>';
+                return;
+            }
+            let levelMessage = "";
+            if(q1.value === 'A1') levelMessage = "⭐ Рекомендуем стартовый групповой курс с поддержкой куратора + 2 бесплатных индивидуальных введения.";
+            else if(q1.value === 'A2') levelMessage = "🔥 Идеальный старт в разговорный клуб и группу A2-B1. Прогресс через 1 месяц.";
+            else if(q1.value === 'B1') levelMessage = "🚀 У вас хорошая база. Советуем интенсивный разговорный с носителем или подготовку к экзаменам.";
+            else levelMessage = "🌟 Ваш уровень высокий! Приходите на специализированные курсы (деловой язык, академический) или клуб дебатов.";
+            
+            let goalAdvice = "";
+            if(q2.value === 'travel') goalAdvice = "Сделаем упор на живую лексику и аудирование.";
+            else if(q2.value === 'work') goalAdvice = "Подготовим к собеседованию и деловой переписке.";
+            else goalAdvice = "Игровая методика и система мотивации для детей.";
+            
+            document.getElementById('quizResult').innerHTML = `<div class="result-box"><strong>Ваш примерный уровень: ${q1.value}</strong><br>${levelMessage}<br>📌 ${goalAdvice}<br><br>🎁 Запишитесь на бесплатный пробный урок — и диагностика точная на занятии!</div>`;
+        });
+    </script>
+</body>
+</html>
